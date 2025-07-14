@@ -18,18 +18,29 @@ const ManagePostsPage = () => {
   }, []);
 
   const fetchPosts = async () => {
-    const res = await axios.get('http://localhost:8081/api/post/visible');
+    const token = localStorage.getItem("token");
+    const res = await axios.get('http://localhost:8081/api/post/visible', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     setPosts(res.data);
   };
 
 const handleHide = async (id) => {
   try {
-    await axios.put(`http://localhost:8081/api/hide/${id}`);
+    const token = localStorage.getItem("token");
+
+    await axios.put(`http://localhost:8081/api/hide/${id}`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      }
+    });
+
     fetchPosts();
   } catch (error) {
     console.error("Failed to hide post:", error);
   }
 };
+
 
 
 
@@ -49,7 +60,10 @@ const handleHide = async (id) => {
   };
 
   const handleUpdate = async () => {
-    await axios.put(`http://localhost:8081/api/post/update/${editingPostId}`, formData);
+    const token = localStorage.getItem("token");
+    await axios.put(`http://localhost:8081/api/post/update/${editingPostId}`, formData, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     setEditingPostId(null);
     setFormData({ title: '', description: '', location: '', closingDate: '', postType: '' });
     fetchPosts();

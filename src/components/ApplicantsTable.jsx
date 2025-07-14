@@ -15,18 +15,30 @@ const ApplicantsTable = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8081/api/post/all-applications')
-      .then(res => {
+    const fetchApplicants = async () => {
+      const token = localStorage.getItem('token'); // ✅ get token from storage
+
+      try {
+        const res = await fetch('http://localhost:8081/api/post/all-applications', {
+          headers: {
+            'Authorization': `Bearer ${token}` // ✅ send token to backend
+          }
+        });
+
         if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-        return res.json();
-      })
-      .then(setApplicants)
-      .catch(err => {
+        const data = await res.json();
+        setApplicants(data);
+      } catch (err) {
         console.error("Error fetching applicants:", err);
         setError("Could not load applicants.");
-      })
-      .finally(() => setLoading(false));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchApplicants();
   }, []);
+
 
   const handleFilterChange = (e) => {
     const { id, value } = e.target;

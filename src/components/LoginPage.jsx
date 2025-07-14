@@ -1,18 +1,20 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './RegistrationForm.css';
+import axios from 'axios';
 
-const LoginPage = ({ setCurrentPage, handleLogin, loading, error }) => {
-  const [username, setUsername] = useState('');
+const LoginPage = ({ handleLogin, loading, error }) => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleLogin(username, password);
+    const success = await handleLogin(email, password); // ✅ passed in from App
+    if (success) {
+      navigate('/adminLandingPage'); // ✅ redirect after login
+    }
   };
-  const handleRegisterClick = () => {
-    navigate('register');
-  }
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center min-vh-100 py-5 px-3">
@@ -21,12 +23,13 @@ const LoginPage = ({ setCurrentPage, handleLogin, loading, error }) => {
         <p className="text-center text-muted mb-4">Please enter your credentials to continue</p>
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="form-group">
-            <label htmlFor="username" className="form-label">Username</label>
+            <label htmlFor="email" className="form-label">Email</label>
             <input
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type="email"
+              id="email"
+              className="form-control"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -35,6 +38,7 @@ const LoginPage = ({ setCurrentPage, handleLogin, loading, error }) => {
             <input
               type="password"
               id="password"
+              className="form-control"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -43,20 +47,15 @@ const LoginPage = ({ setCurrentPage, handleLogin, loading, error }) => {
           {error && <p className="text-danger text-center small mt-2">{error}</p>}
           <button
             type="submit"
-            className="register-btn"
+            className="register-btn btn btn-danger mt-3 w-100"
             disabled={loading}
           >
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-        <div className="text-center mt-4">
-          <p className="text-muted small">
-            Don't have an account?
-            <button className="btn btn-link text-danger p-0 ms-1" onClick={handleRegisterClick}>Register</button>
-          </p>
-        </div>
       </div>
     </div>
   );
-}
+};
+
 export default LoginPage;

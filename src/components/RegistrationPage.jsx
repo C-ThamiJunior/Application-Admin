@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './RegistrationForm.css';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const RegistrationPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    firstName: '',
+    firstname: '',
     surname: '',
     email: '',
     contactNumber: '',
@@ -18,17 +21,35 @@ const RegistrationPage = () => {
       [name]: value,
     }));
   };
+  const handleLoginClick = () => {
+    navigate('/'); // Navigate to the login page
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-    console.log('Form data submitted:', formData);
-    alert('Registration successful!');
-    // Here you would typically send the data to a server
+
+    try {
+      const response = await axios.post('http://localhost:8081/api/auth/register', {
+        firstname: formData.firstname,  // Assuming backend uses `username`
+        email: formData.email,
+        password: formData.password,
+        surname: formData.surname, // Assuming backend uses `surname`
+        contactNumber: formData.contactNumber, // Assuming backend uses `contactNumber`
+        role: "ADMIN" // or let backend default to STUDENT if role is optional
+      });
+
+      alert('Registration successful!');
+      navigate('/'); // ✅ Go to login page
+    } catch (error) {
+      console.error('Registration failed:', error);
+      alert(error.response?.data?.message || "Something went wrong!");
+    }
   };
+
 
   return (
     <div className="form-container">
@@ -38,9 +59,9 @@ const RegistrationPage = () => {
           <label htmlFor="firstName">FIRST NAME</label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
+            id="firstname"
+            name="firstname"
+            value={formData.firstname}
             onChange={handleChange}
             required
           />
@@ -107,7 +128,7 @@ const RegistrationPage = () => {
        <div className="text-center mt-4">
           <p className="text-muted small">
             Already have an account?
-            <button className="btn btn-link p-0 ms-1" onClick={() => setCurrentPage('login')}>Login</button>
+              <button className="btn btn-link text-danger p-0 ms-1" onClick={handleLoginClick}>Login</button>
           </p>
         </div>
     </div>
