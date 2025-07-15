@@ -19,7 +19,7 @@ const ApplicantsTable = () => {
       const token = localStorage.getItem('token'); // ✅ get token from storage
 
       try {
-        const res = await fetch('http://localhost:8081/api/post/all-applications', {
+        const res = await fetch('${import.meta.env.VITE_API_URL}/api/post/all-applications', {
           headers: {
             'Authorization': `Bearer ${token}` // ✅ send token to backend
           }

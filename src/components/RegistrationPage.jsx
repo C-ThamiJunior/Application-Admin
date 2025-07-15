@@ -33,7 +33,7 @@ const RegistrationPage = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8081/api/auth/register', {
+      const response = await axios.post('${import.meta.env.VITE_API_URL}/api/auth/register', {
         firstname: formData.firstname,  // Assuming backend uses `username`
         email: formData.email,
         password: formData.password,

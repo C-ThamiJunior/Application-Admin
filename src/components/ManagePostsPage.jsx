@@ -19,7 +19,7 @@ const ManagePostsPage = () => {
 
   const fetchPosts = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.get('http://localhost:8081/api/post/visible', {
+    const res = await axios.get('${import.meta.env.VITE_API_URL}/api/post/visible', {
       headers: { Authorization: `Bearer ${token}` }
     });
     setPosts(res.data);
@@ -29,7 +29,7 @@ const handleHide = async (id) => {
   try {
     const token = localStorage.getItem("token");
 
-    await axios.put(`http://localhost:8081/api/hide/${id}`, {}, {
+    await axios.put(`${import.meta.env.VITE_API_URL}/api/hide/${id}`, {}, {
       headers: {
         Authorization: `Bearer ${token}` 
       }
@@ -61,7 +61,7 @@ const handleHide = async (id) => {
 
   const handleUpdate = async () => {
     const token = localStorage.getItem("token");
-    await axios.put(`http://localhost:8081/api/post/update/${editingPostId}`, formData, {
+    await axios.put(`${import.meta.env.VITE_API_URL}/api/post/update/${editingPostId}`, formData, {
       headers: { Authorization: `Bearer ${token}` }
     });
     setEditingPostId(null);
