@@ -22,6 +22,9 @@ const AdminLandingPage = () => {
            <Link to="/managePostsPage" className="btn btn-outline-danger d-flex align-items-center justify-content-center gap-2">
             <Users size={20} /> Manage Posts
           </Link>
+          <Link to="/register" className="btn btn-outline-danger d-flex align-items-center justify-content-center gap-2">
+            <Users size={20} /> Register Admin
+          </Link>
         </div>
       </div>
     </div>

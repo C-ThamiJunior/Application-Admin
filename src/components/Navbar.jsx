@@ -21,6 +21,9 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/applicants">View Applicants</Link>
             </li>
+             <li className="nav-item">
+              <Link className="nav-link" to="/register">Register</Link>
+            </li>
             <li className="nav-item">
               <button onClick={handleLogout} className="btn btn-outline-light ms-3">Logout</button>
             </li>
