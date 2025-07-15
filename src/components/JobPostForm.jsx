@@ -19,7 +19,7 @@ const JobPostForm = () => {
     console.log('Job posted:', job);
     // Add your API call  here
 try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/api/post/createpostform', {
+    const response = await fetch('https://b-t-backend-production.up.railway.app/api/post/createpostform', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
