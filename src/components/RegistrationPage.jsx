@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import './RegistrationForm.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './RegistrationForm.css'; // Optional: for watermark + spacing
+import logo from '/images/logo.png';
 
 const RegistrationPage = () => {
   const navigate = useNavigate();
@@ -16,121 +17,135 @@ const RegistrationPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
     }));
-  };
-  const handleLoginClick = () => {
-    navigate('/'); // Navigate to the login page
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      alert('Passwords do not match!');
       return;
     }
 
     try {
-      const response = await axios.post('https://b-t-backend-production.up.railway.app/api/auth/register', {
-        firstname: formData.firstname,  // Assuming backend uses `username`
+      await axios.post('https://b-t-backend-production.up.railway.app/api/auth/register', {
+        firstname: formData.firstname,
+        surname: formData.surname,
         email: formData.email,
+        contactNumber: formData.contactNumber,
         password: formData.password,
-        surname: formData.surname, // Assuming backend uses `surname`
-        contactNumber: formData.contactNumber, // Assuming backend uses `contactNumber`
-        role: "ADMIN" // or let backend default to STUDENT if role is optional
+        role: 'ADMIN',
       });
 
       alert('Registration successful!');
-      navigate('/'); // ✅ Go to login page
-    } catch (error) {
-      console.error('Registration failed:', error);
-      alert(error.response?.data?.message || "Something went wrong!");
+      navigate('/');
+    } catch (err) {
+      console.error('Registration failed:', err);
+      alert(err.response?.data?.message || 'Something went wrong!');
     }
   };
 
-
   return (
-    <div className="form-container">
-      <h2>REGISTER</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="firstName">FIRST NAME</label>
-          <input
-            type="text"
-            id="firstname"
-            name="firstname"
-            value={formData.firstname}
-            onChange={handleChange}
-            required
-          />
+    <div className="page-with-watermark d-flex flex-column justify-content-center align-items-center min-vh-100 py-5 px-3">
+      <div className="form-container bg-white text-dark border rounded-4 shadow-lg p-5 w-100" style={{ maxWidth: '700px' }}>
+        <div className="text-center mb-4">
+          <img src={logo} alt="Logo" className="logo" style={{ width: '120px' }} />
         </div>
-        <div className="form-group">
-          <label htmlFor="surname">SURNAME</label>
-          <input
-            type="text"
-            id="surname"
-            name="surname"
-            value={formData.surname}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">EMAIL</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="contactNumber">CONTACT NUMBER</label>
-          <input
-            type="tel"
-            id="contactNumber"
-            name="contactNumber"
-            value={formData.contactNumber}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">CREATE PASSWORD</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirmPassword">CONFIRM PASSWORD</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" className="register-btn">
-          REGISTER
-        </button>
-      </form>
-       <div className="text-center mt-4">
+
+        <form onSubmit={handleSubmit}>
+          <div className="row mb-3">
+            <div className="col-md-6">
+              <input
+                type="text"
+                name="firstname"
+                className="form-control"
+                placeholder="First Name"
+                value={formData.firstname}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="col-md-6 mt-3 mt-md-0">
+              <input
+                type="text"
+                name="surname"
+                className="form-control"
+                placeholder="Surname"
+                value={formData.surname}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="row mb-3">
+            <div className="col-md-6">
+              <input
+                type="email"
+                name="email"
+                className="form-control"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="col-md-6 mt-3 mt-md-0">
+              <input
+                type="tel"
+                name="contactNumber"
+                className="form-control"
+                placeholder="Contact Number"
+                value={formData.contactNumber}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="row mb-4">
+            <div className="col-md-6">
+              <input
+                type="password"
+                name="password"
+                className="form-control"
+                placeholder="Create Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="col-md-6 mt-3 mt-md-0">
+              <input
+                type="password"
+                name="confirmPassword"
+                className="form-control"
+                placeholder="Confirm Password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          <button type="submit" className="btn btn-danger w-100">
+            Register
+          </button>
+        </form>
+
+        <div className="text-center mt-4">
           <p className="text-muted small">
             Already have an account?
-              <button className="btn btn-link text-danger p-0 ms-1" onClick={handleLoginClick}>Login</button>
+            <button className="btn btn-link text-danger p-0 ms-1" onClick={() => navigate('/')}>
+              Login
+            </button>
           </p>
         </div>
+      </div>
     </div>
   );
 };
