@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './RegistrationForm.css'; // Optional: for watermark + spacing
-import logo from '/images/logo.png';
 
 const RegistrationPage = () => {
   const navigate = useNavigate();
@@ -53,7 +52,7 @@ const RegistrationPage = () => {
     <div className="page-with-watermark d-flex flex-column justify-content-center align-items-center min-vh-100 py-5 px-3">
       <div className="form-container bg-white text-dark border rounded-4 shadow-lg p-5 w-100" style={{ maxWidth: '700px' }}>
         <div className="text-center mb-4">
-          <img src={logo} alt="Logo" className="logo" style={{ width: '120px' }} />
+          <img src="/images/logo.png" alt="Logo" className="logo" style={{ width: '120px' }} />
         </div>
 
         <form onSubmit={handleSubmit}>
