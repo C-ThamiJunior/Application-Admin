@@ -1,29 +1,40 @@
 .form-container {
-  width: 100%;
-  max-width: 450px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 700px;
+  width: 90%;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   position: relative;
   z-index: 1;
+  transition: all 0.3s ease-in-out;
+  height: auto;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
-/* Watermark container */
-.page-with-watermark {
+
+/* ✅ Watermark Background */
+.page-with-watermark,
+.login-page-container {
   position: relative;
   min-height: 100vh;
   background-color: #f8f9fa;
   overflow: hidden;
 }
 
-.page-with-watermark::before {
+/* Watermark Logo Background */
+.page-with-watermark::before,
+.login-page-container::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   background-image: url('/images/logo.png');
-  background-size: 300px;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 800px; /* adjust size as needed */
   opacity: 0.05;
   transform: translate(-50%, -50%);
   width: 100%;
@@ -31,6 +42,15 @@
   z-index: 0;
 }
 
+/* ✅ Optional: Replace Heading with Logo */
+.form-container .logo {
+  display: block;
+  margin: 0 auto 2rem auto;
+  min-width: 150px;
+  width: 100%;
+}
+
+/* 🔤 Typography */
 .form-container h2 {
   text-align: center;
   margin-bottom: 2rem;
@@ -39,6 +59,7 @@
   letter-spacing: 1px;
 }
 
+/* 🎯 Form Fields */
 .form-group {
   margin-bottom: 1.25rem;
 }
@@ -46,32 +67,34 @@
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  font-size: 0.8rem;
-  color: #555;
+  font-size: 0.85rem;
+  color: #444;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 .form-group input {
   width: 100%;
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 1.1rem;
   border: 1px solid #ccc;
-  border-radius: 25px;
+  border-radius: 30px;
+  font-size: 0.95rem;
   box-sizing: border-box;
-  font-size: 0.9rem;
   transition: border-color 0.3s;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #d9534f;
+  border-color: #dc3545;
 }
 
+/* 🚀 Submit Button */
 .register-btn {
   width: 100%;
   padding: 0.9rem;
   border: none;
-  border-radius: 25px;
-  background-color: #d9534f;
+  border-radius: 30px;
+  background-color: #dc3545;
   color: white;
   font-size: 1rem;
   font-weight: bold;
@@ -84,33 +107,37 @@
   background-color: #c9302c;
 }
 
-.login-page-container {
-  position: relative;
-  background-color: #f8f9fa;
-  overflow: hidden;
-  min-height: 100vh;
+/* 🔗 Login Link */
+.btn-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+/* Row styling */
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
 }
 
-.login-page-container::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background-image: url('/images/logo.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 1080px; 
-  opacity: 0.13;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+/* Input styling for inline layout */
+.form-row input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
 }
 
+.form-row input:focus {
+  outline: none;
+  border-color: #dc3545;
+}
 
-.form-container {
-  position: relative;
-  z-index: 1;
-  max-width: 400px;
-  width: 100%;
+/* Responsive - stack inputs on smaller screens */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
 }
