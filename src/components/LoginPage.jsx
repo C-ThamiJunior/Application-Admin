@@ -19,12 +19,13 @@ const LoginPage = ({ handleLogin, loading, error }) => {
   return (
       <div className="login-page-container d-flex flex-column justify-content-center align-items-center min-vh-100 py-5 px-3">
         <div className="form-container bg-white text-dark border rounded-4 shadow-lg p-5 w-100">
-          <p className="text-center text-muted mb-4">
-            <div className="text-center mb-4">
-              <img src={logo} alt="Logo" className="img-fluid" style={{ height: '50px' }} />
-            </div>
-            Please enter your credentials to continue
-          </p>
+       <div className="text-center text-muted mb-4">
+        <div className="text-center mb-4">
+          <img src={logo} alt="Logo" className="img-fluid" style={{ height: '50px' }} />
+          </div>
+          <p>Please enter your credentials to continue</p>
+        </div>
+
           <form onSubmit={handleSubmit} className="needs-validation" noValidate>
             <div className="form-group">
               <label htmlFor="email" className="form-label">Email</label>
