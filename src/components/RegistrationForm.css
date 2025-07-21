@@ -24,24 +24,6 @@
   overflow: hidden;
 }
 
-/* Watermark Logo Background */
-.page-with-watermark::before,
-.login-page-container::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background-image: url('/images/logo.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 800px; /* adjust size as needed */
-  opacity: 0.05;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
 /* ✅ Optional: Replace Heading with Logo */
 .form-container .logo {
   display: block;
