@@ -31,7 +31,7 @@ const RegistrationPage = () => {
     }
 
     try {
-      await axios.post('https://b-t-backend-production.up.railway.app/api/auth/register', {
+      await axios.post('https://b-t-backend.onrender.com/api/auth/register', {
         firstname: formData.firstname,
         surname: formData.surname,
         email: formData.email,

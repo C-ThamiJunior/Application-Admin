@@ -19,7 +19,7 @@ const ApplicantsTable = () => {
       const token = localStorage.getItem('token'); // ✅ get token from storage
 
       try {
-        const res = await fetch('https://b-t-backend-production.up.railway.app/api/post/all-applications', {
+        const res = await fetch('https://b-t-backend.onrender.com/api/post/all-applications', {
           headers: {
             'Authorization': `Bearer ${token}` // ✅ send token to backend
           }
