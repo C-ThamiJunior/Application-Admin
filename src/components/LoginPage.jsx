@@ -59,18 +59,6 @@ const LoginPage = ({ handleLogin, loading, error }) => {
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-
-        <div className="text-center mt-4">
-          <p className="text-muted small">
-            Don't have an account?
-            <button
-              className="btn btn-link text-danger p-0 ms-1"
-              onClick={() => navigate('/register')}
-            >
-              Register
-            </button>
-          </p>
-        </div>
       </div>
     </div>
   );
