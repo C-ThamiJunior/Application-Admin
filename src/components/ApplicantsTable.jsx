@@ -118,7 +118,7 @@ const ApplicantsTable = () => {
                     <td>{app.createdDate?.split('T')[0]}</td>
                     <td>{app.fileNames?.length > 0 ? (
                     <a
-                      href={`https://b-t-backend-production.up.railway.app/files/${encodeURIComponent(app.fileNames[0])}`}
+                      href={`https://b-t-backend.onrender.com/files/${encodeURIComponent(app.fileNames[0])}`}
                       className="text-danger"
                       target="_blank"
                       rel="noopener noreferrer"

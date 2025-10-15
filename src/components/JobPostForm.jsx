@@ -19,7 +19,7 @@ const JobPostForm = () => {
     console.log('Job posted:', job);
     // Add your API call  here
 try {
-    const response = await fetch('https://b-t-backend-production.up.railway.app/api/post/createpostform', {
+    const response = await fetch('https://b-t-backend.onrender.com/api/post/createpostform', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
