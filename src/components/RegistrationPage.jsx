@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './RegistrationForm.css'; // Optional: for watermark + spacing
+import './RegistrationForm.css'; 
 
 const RegistrationPage = () => {
   const navigate = useNavigate();
@@ -31,20 +31,27 @@ const RegistrationPage = () => {
     }
 
     try {
-      await axios.post('https://b-t-backend.onrender.com/api/auth/register', {
+      console.log("Sending registration data..."); // Debug log
+
+      // ✅ FIX: Changed http to https
+      const response = await axios.post('https://b-t-backend-production-1580.up.railway.app/api/auth/register', {
         firstname: formData.firstname,
         surname: formData.surname,
         email: formData.email,
         contactNumber: formData.contactNumber,
         password: formData.password,
-        role: 'ADMIN',
+        role: 'ADMIN', // Note: Ideally this is handled on backend, but ok for demo
       });
 
+      console.log("Response:", response.data);
       alert('Registration successful!');
       navigate('/');
+      
     } catch (err) {
       console.error('Registration failed:', err);
-      alert(err.response?.data?.message || 'Something went wrong!');
+      // Detailed error alert
+      const errorMessage = err.response?.data?.message || err.message || 'Something went wrong!';
+      alert(`Registration Failed: ${errorMessage}`);
     }
   };
 

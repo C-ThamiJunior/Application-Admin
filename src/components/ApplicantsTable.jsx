@@ -19,7 +19,7 @@ const ApplicantsTable = () => {
       const token = localStorage.getItem('token'); // ✅ get token from storage
 
       try {
-        const res = await fetch('https://b-t-backend.onrender.com/api/post/all-applications', {
+        const res = await fetch('https://b-t-backend-production-1580.up.railway.app/api/post/all-applications', {
           headers: {
             'Authorization': `Bearer ${token}` // ✅ send token to backend
           }
@@ -118,7 +118,7 @@ const ApplicantsTable = () => {
                     <td>{app.createdDate?.split('T')[0]}</td>
                     <td>{app.fileNames?.length > 0 ? (
                     <a
-                      href={`https://b-t-backend.onrender.com/files/${encodeURIComponent(app.fileNames[0])}`}
+                      href={`https://b-t-backend-production-1580.up.railway.app/files/${encodeURIComponent(app.fileNames[0])}`}
                       className="text-danger"
                       target="_blank"
                       rel="noopener noreferrer"

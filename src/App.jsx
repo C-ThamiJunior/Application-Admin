@@ -19,7 +19,7 @@ function App() {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post('https://b-t-backend.onrender.com/api/auth/login', {
+      const response = await axios.post('https://b-t-backend-production-1580.up.railway.app/api/auth/login', {
         email,
         password,
       });
