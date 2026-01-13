@@ -19,7 +19,7 @@ const ManagePostsPage = () => {
 
   const fetchPosts = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.get('http://localhost:8081/api/post/visible', {
+    const res = await axios.get('https://b-t-backend-production-1580.up.railway.app/api/post/visible', {
       headers: { Authorization: `Bearer ${token}` }
     });
     setPosts(res.data);
