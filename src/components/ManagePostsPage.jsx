@@ -19,7 +19,7 @@ const ManagePostsPage = () => {
 
   const fetchPosts = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.get('https://b-t-backend-production-1580.up.railway.app/api/post/visible', {
+    const res = await axios.get('https://b-t-backend-uc9w.onrender.com/api/post/visible', {
       headers: { Authorization: `Bearer ${token}` }
     });
     setPosts(res.data);
@@ -29,7 +29,7 @@ const handleHide = async (id) => {
   try {
     const token = localStorage.getItem("token");
 
-    await axios.put(`https://b-t-backend-production-1580.up.railway.app/api/hide/${id}`, {}, {
+    await axios.put(`https://b-t-backend-uc9w.onrender.com/api/hide/${id}`, {}, {
       headers: {
         Authorization: `Bearer ${token}` 
       }
@@ -61,7 +61,7 @@ const handleHide = async (id) => {
 
   const handleUpdate = async () => {
     const token = localStorage.getItem("token");
-    await axios.put(`https://b-t-backend-production-1580.up.railway.app/api/post/update/${editingPostId}`, formData, {
+    await axios.put(`https://b-t-backend-uc9w.onrender.com/api/post/update/${editingPostId}`, formData, {
       headers: { Authorization: `Bearer ${token}` }
     });
     setEditingPostId(null);

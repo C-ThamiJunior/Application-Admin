@@ -34,7 +34,7 @@ const RegistrationPage = () => {
       console.log("Sending registration data..."); // Debug log
 
       // ✅ FIX: Changed http to https
-      const response = await axios.post('https://b-t-backend-production-1580.up.railway.app/api/auth/register', {
+      const response = await axios.post('https://b-t-backend-uc9w.onrender.com/api/auth/register', {
         firstname: formData.firstname,
         surname: formData.surname,
         email: formData.email,
